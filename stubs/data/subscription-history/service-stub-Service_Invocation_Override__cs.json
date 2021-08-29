@@ -1,0 +1,21 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef1"
+            },            
+            "Name":"SubscriptionHistory_Invoker",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": true,
+            "Metadata_Invoker_Id__c": "SubscriptionHistory_Invoker",
+            "Output_Interface_Version__c": "IQueryListMap",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService",
+            "Stub_Class__c": "SubscriptionHistoryV1_Stub"
+        }
+    ]
+}

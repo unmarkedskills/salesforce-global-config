@@ -1,0 +1,37 @@
+{
+  "orgName": "SageGroup",
+  "edition": "Developer",
+  "adminEmail": "oneit-ead-ats-salesforcesupport@sage.com",
+  "hasSampleData": false,
+  "features": [ "EnableSetPasswordInApi", "Communities", "ServiceCloud", "MultiCurrency", "StateAndCountryPicklist","PlatformCache","SharedActivities" ],
+  "settings": {
+        "communitiesSettings": {
+            "enableNetworksEnabled": true
+        },
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        },
+        "omniChannelSettings": {
+            "enableOmniChannel": true
+        },
+        "caseSettings": {
+            "systemUserEmail": "oneit-ead-ats-salesforcesupport@sage.com"
+        },
+        "mobileSettings": {
+            "enableS1EncryptedStoragePref2": false
+        },
+        "liveAgentSettings": {
+            "enableLiveAgent": true
+        },
+        "languageSettings": {
+            "enableTranslationWorkbench": true,
+            "enableEndUserLanguages": true
+        },
+        "accountSettings": {
+            "enableAccountTeams": true
+        },
+        "opportunitySettings": {
+            "enableOpportunityTeam": true
+        }
+    }
+}

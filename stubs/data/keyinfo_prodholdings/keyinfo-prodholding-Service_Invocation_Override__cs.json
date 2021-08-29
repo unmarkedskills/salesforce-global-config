@@ -1,0 +1,52 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef1"
+            },            
+            "Name":"KeyAccountInfo_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Iteration__c": 1,
+            "Log_Requests__c": false,
+            "Invocation_Type__c": "Sync",
+            "Metadata_Invoker_Id__c": "KeyAccountInfo_Invocation_1",
+            "Method__c": "Query",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService"
+        },
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef2"
+            },            
+            "Name":"ProductHoldingSummary_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Iteration__c": 1,
+            "Log_Requests__c": false,
+            "Invocation_Type__c": "Sync",
+            "Metadata_Invoker_Id__c": "ProductHoldingSummary_Invocation_1",
+            "Method__c": "Query",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService"
+        },
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef3"
+            },            
+            "Name":"DynamicQueryService_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Iteration__c": 1,
+            "Log_Requests__c": false,
+            "Invocation_Type__c": "Sync",
+            "Metadata_Invoker_Id__c": "DynamicQueryService_Invocation_1",
+            "Method__c": "Query",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService"
+        }           
+    ]
+}

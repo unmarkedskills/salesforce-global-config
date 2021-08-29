@@ -1,0 +1,28 @@
+# action.yml
+name: 'Perform Action'
+description: 'Create docker container and run requested operation'
+inputs:
+  operation: # operation to perform create_version, validate, install
+    description: 'Process to execute'
+    required: true
+  imageurl: # url for docker image
+    description: 'url for docker image'
+    required: true
+  workspace: # workspace path
+    description: 'workspace path'
+    required: true
+# composite run
+runs:
+  using: 'composite'
+  steps:
+    # run docker container with volume mapping
+    - name: Run Container
+      run: docker run -e DEV_HUB_URL -e BRANCH -e SCRIPTS_PATH -e LATEST_COMMIT -e ENV_URL
+        --workdir /operation/workspace 
+        -v "/var/run/docker.sock":"/var/run/docker.sock" 
+        -v "/home/runner/work/_temp/_github_home":"/operation/home" 
+        -v "/home/runner/work/_temp/_github_workflow":"/operation/workflow" 
+        -v "/home/runner/work/_temp/_runner_file_commands":"/operation/file_commands" 
+        -v "${{ inputs.workspace }}":"/operation/workspace"
+        ${{ inputs.imageurl }} ${{ inputs.operation }}
+      shell: bash

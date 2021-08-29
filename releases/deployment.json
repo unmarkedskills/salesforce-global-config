@@ -1,0 +1,12 @@
+{
+    "releaseName":"release 1.2.1 - Hotfix",
+    "releaseVersion": "1.2.1",
+    "releaseDate":"DD/MM/YYYY",
+    "packages": [
+        {
+            "name": "salesforce-global-sales",
+            "version": "1.24.0.1",
+            "sequence": 1
+        }
+    ]
+}

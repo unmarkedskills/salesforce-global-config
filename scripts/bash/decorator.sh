@@ -1,0 +1,8 @@
+#!/bin/sh
+RED="\x1B[0;31m"
+GREEN="\x1B[0;32m"
+RED_BOLD="\x1B[1;31m"
+GREEN_BOLD="\x1B[1;32m"
+GREY_BOLD="\x1B[1;30m"
+GREY="\x1B[1;39m"
+NO_COLOUR="\x1B[0m"

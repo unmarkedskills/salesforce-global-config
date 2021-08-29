@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "8c7ee75e-0080-4b8b-9262-4c24d93320bb",
+		"name": "Tetris-Ecommerce Emails",
+		"description": "> ℹ️ &nbsp;&nbsp;**March 2021 news:** our friends at MuleSoft are looking at how you could be using Postman with MuleSoft. Could you help them by filing this [short survey](https://www.surveymonkey.com/r/8TKRBW6)?\n\nThe Salesforce APIs collection contains 230+ requests for the following Salesforce APIs:\n\n<table>\n   <tr>\n      <td>Async Query\n          Auth\n          Bulk (v1 & v2)\n          Composite\n          Connect (Chatter)\n          CPQ</td>\n      <td>Einstein Prediction Service\n          Metadata\n          Rest\n          Tooling\n          UI</td>\n   </tr>\n</table>\n\n**⚠️ Disclaimers:**\n- This collection is provided as-is. It's not officially supported by Salesforce or covered by SLAs.\n- API documentation is not provided with the collection. Please refer to the [official documentation](https://developer.salesforce.com/docs).\n\nℹ️ Report issues and ask questions [here](https://github.com/forcedotcom/postman-salesforce-apis/issues).\n\n## Get started\n\nFollow [this documentation](https://github.com/forcedotcom/postman-salesforce-apis) to get started with the collection.\n\n## Variables Reference\n\nThe collection relies on the following variables:\n\n| Variable | Description |\n| --- | --- |\n| `url` | The base URL for all requests. Either:<br/>- `https://test.salesforce.com` for sandboxes or Scratch orgs<br/>- `https://login.salesforce.com` for production, Trailhead Playground and Developer Edition orgs<br/>- your custom My Domain base URL. |\n| `version` | The Salesforce API version (e.g.: 50.0). |\n| `username ` | Your username. |\n| `password ` | Your password. |\n| `secretToken ` | Your personal [security token](https://help.salesforce.com/articleView?id=user_security_token.htm). |\n| `clientId ` | Connected App client Id. |\n| `clientSecret ` | Connected App client secret. |\n| `redirectUrl ` | Connected App redirect URL for OAuth 2.0. |\n| `initAccessToken ` | Initial access token for dynamic Connected App registration. |\n| `site ` | Community suffix when connecting with an Experience Cloud user. |\n\nOnly a few of these variables are mandatory. The authentication requests will automatically register and set extra \"private\" variables identified with a `_` prefix (e.g.: `_accessToken`, `_endpoint`, `_orgId`, `_userId`...).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "REST",
+			"item": [
+				{
+					"name": "Email Template Requests",
+					"item": [
+						{
+							"name": "Limits",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SUSPENDED_SUBSCRIPTION_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"SUSPENDED_SUBSCRIPTION_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisSuspendedSubscriptionENUS - SUSPENDED_SUBSCRIPTION_EN_US\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"contactId\":\"{{contactId}}\",\n    \"templateValues\": [\n        {\n            \"fieldName\": \"isSageAccountantCloud\",\n            \"fieldValue\": \"false\"\n        }       \n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ASSISTED_SALES_ORDER_CONFIRM_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"ASSISTED_SALES_ORDER_CONFIRM_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"ASSISTED_SALES_ORDER_CONFIRM_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"contactId\":\"{{contactId}}\",\n    \"templateValues\": [\n        {\n            \"fieldName\": \"product\",\n            \"fieldValue\": \"Accounting\"\n        },\n        {\n            \"fieldName\": \"emailAddress\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"setupYourAccountUrl\",\n            \"fieldValue\": \"https://test.com\"\n        },\n        {\n            \"fieldName\": \"findOutMoreUrl\",\n            \"fieldValue\": \"https://test.com\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ASSISTED_SALES_ORDER_CONFIRM_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"ASSISTED_SALES_ORDER_CONFIRM_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"ASSISTED_SALES_ORDER_CONFIRM_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"product\",\n            \"fieldValue\": \"Accounting\"\n        },\n        {\n            \"fieldName\": \"emailAddress\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"setupYourAccountUrl\",\n            \"fieldValue\": \"https://test.com\"\n        },\n        {\n            \"fieldName\": \"findOutMoreUrl\",\n            \"fieldValue\": \"https://test.com\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CANCELLED_SUBSCRIPTION_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CANCELLED_SUBSCRIPTION_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisCancelledSubscriptionFRCA - CANCELLED_SUBSCRIPTION_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CANCELLED_SUBSCRIPTION_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CANCELLED_SUBSCRIPTION_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisCancelledSubscriptionENCA - CANCELLED_SUBSCRIPTION_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": []\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CANCELLED_SUBSCRIPTION_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CANCELLED_SUBSCRIPTION_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisCancelledSubscriptionENUS - CANCELLED_SUBSCRIPTION_EN_US\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"isSageAccountantCloud\",\n            \"fieldValue\": \"false\"\n        }       \n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CONVERT_CONFIRM_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" CONVERT_CONFIRM_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisConvertConfirmationENCA- CONVERT_CONFIRM_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"buyerEmail\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage Business Cloud Accounting\"\n        },\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Frank\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CONVERT_CONFIRM_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" CONVERT_CONFIRM_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisConvertConfirmationFRCA- CONVERT_CONFIRM_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"buyerEmail\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage Business Cloud Accounting\"\n        },\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Frank\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CONVERT_CART_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CONVERT_CART_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisConvertENCA - CONVERT_CART_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"buyerEmail\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage Business Cloud Accounting\"\n        },\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Frank\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CONVERT_CART_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CONVERT_CART_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisConvertENUS - CONVERT_CART_EN_US\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"buyerEmail\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage Business Cloud Accounting\"\n        },\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Frank\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "CONVERT_CART_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"CONVERT_CART_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisConvertENCA - CONVERT_CART_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"buyerEmail\",\n            \"fieldValue\": \"{{toEmailAddress}}\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage Business Cloud Accounting\"\n        },\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Frank\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PAYMENT_DECLINE_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"PAYMENT_DECLINE_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"PAYMENT_DECLINE_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"isSageAccountantCloud\",\n            \"fieldValue\": \"true\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PAYMENT_DECLINE_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"PAYMENT_DECLINE_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"PAYMENT_DECLINE_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"isSageAccountantCloud\",\n            \"fieldValue\": \"true\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RESUME_SUBSCRIPTION_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"RESUME_SUBSCRIPTION_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"RESUME_SUBSCRIPTION_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"subscriptionName\",\n            \"fieldValue\": \"Accounting\"\n        },\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"veni\"\n        },\n        {\n            \"fieldName\": \"lastName\",\n            \"fieldValue\": \"korapaty\"\n        },\n        {\n            \"fieldName\": \"createdDate\",\n            \"fieldValue\": \"03/15/2021\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "RESUME_SUBSCRIPTION_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"RESUME_SUBSCRIPTION_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"RESUME_SUBSCRIPTION_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"subscriptionName\",\n            \"fieldValue\": \"Accounting\"\n        },\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"veni\"\n        },\n        {\n            \"fieldName\": \"lastName\",\n            \"fieldValue\": \"korapaty\"\n        },\n        {\n            \"fieldName\": \"createdDate\",\n            \"fieldValue\": \"03/15/2021\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TRIAL_CONFIRMATION_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"TRIAL_CONFIRMATION_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",,\n    \"subject\": \"TetrisTrialConfirmationENCA - TRIAL_CONFIRMATION_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Veni\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TRIAL_CONFIRMATION_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"TRIAL_CONFIRMATION_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisTrialConfirmationFRCA - TRIAL_CONFIRMATION_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Veni Korapaty\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TRIAL_CONFIRMATION_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"TRIAL_CONFIRMATION_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisTrialConfirmationENUS - TRIAL_CONFIRMATION_EN_US\",\n    \"ccEmailAddressList\": [\n        \"Shanmuk.Hanumanthu@sage.com\",\n        \"test3.test@sage.com\"\n    ],\n    \"bccEmailAddressList\": [\n        \"Shanmuk.Hanumanthu@sage.com\",\n        \"test3.test@sage.com\"\n    ],\n    \"contactId\":\"{{contactId}}\",\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Fred Tester\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPSELL_CART_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"UPSELL_CART_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"UPSELL_CART_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage One Accounting_UKI\"\n        },\n        {\n            \"fieldName\": \"existingProductInfo\",\n            \"fieldValue\": \"Existing Product Info\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPSELL_CART_EN_GB",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"UPSELL_CART_EN_GB\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"UPSELL_CART_EN_GB\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage One Accounting_UKI\"\n        },\n        {\n            \"fieldName\": \"existingProductInfo\",\n            \"fieldValue\": \"Existing Product Info\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPSELL_CART_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"UPSELL_CART_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisUpsellENUS - UPSELL_CART_EN_US\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage One Accounting_US\"\n        },\n        {\n            \"fieldName\": \"existingProductInfo\",\n            \"fieldValue\": \"Existing Product Info\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPSELL_CART_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"UPSELL_CART_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"UPSELL_CART_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"orderContactName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"productNames\",\n            \"fieldValue\": \"Sage One Accounting_UKI\"\n        },\n        {\n            \"fieldName\": \"existingProductInfo\",\n            \"fieldValue\": \"Existing Product Info\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "WELCOME_SBC_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"WELCOME_SBC_FR_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"WELCOME_SBC_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"completeOrderURL\",\n            \"fieldValue\": \"https://sage.com\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "WELCOME_SBC_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"WELCOME_SBC_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"WELCOME_SBC_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"completeOrderURL\",\n            \"fieldValue\": \"https://sage.com\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BUY_CONFIRMATION_EN_GB",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"BUY_CONFIRMATION_EN_GB\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"BUY_CONFIRMATION_EN_GB\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BUY_CONFIRMATION_EN_US",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \"BUY_CONFIRMATION_EN_US\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisBuyConfirmationENUS - BUY_CONFIRMATION_EN_US\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Crispian\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TRIAL_COMPLETE_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" TRIAL_COMPLETE_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisTrialOrderCompletedENCA- TRIAL_COMPLETE_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TRIAL_COMPLETE_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" TRIAL_COMPLETE_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisTrialOrderCompletedFRCA- TRIAL_COMPLETE_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ORDER_CONFIRM_EN_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" TRIAL_COMPLETE_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisOrderConfirmationENCA- ORDER_CONFIRM_EN_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"setupYourAccountUrl\",\n            \"fieldValue\": \"setupYourAccountUrl sage.com\"\n        },\n        {\n            \"fieldName\": \"subscriptionName\",\n            \"fieldValue\": \"subs Account Name\"\n        },\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"createdDate\",\n            \"fieldValue\": \"03/18/2021\"\n        },\n        {\n            \"fieldName\": \"lastName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ORDER_CONFIRM_FR_CA",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tetrisEmailType\": \" TRIAL_COMPLETE_EN_CA\",\n    \"toEmailAddress\": \"{{toEmailAddress}}\",\n    \"fromEmailAddress\": \"no-reply15@sage.com\",\n    \"fromName\": \"Sage No-Reply\",\n    \"subject\": \"TetrisOrderConfirmationFRCA- ORDER_CONFIRM_FR_CA\",\n    \"ccEmailAddressList\": [\n        {{ccEmailAddressList}}\n    ],\n    \"bccEmailAddressList\": [\n        {{bccEmailAddressList}}\n    ],\n    \"templateValues\": [\n        {\n            \"fieldName\": \"setupYourAccountUrl\",\n            \"fieldValue\": \"setupYourAccountUrl sage.com\"\n        },\n        {\n            \"fieldName\": \"subscriptionName\",\n            \"fieldValue\": \"subs Account Name\"\n        },\n        {\n            \"fieldName\": \"firstName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        },\n        {\n            \"fieldName\": \"createdDate\",\n            \"fieldValue\": \"03/18/2021\"\n        },\n        {\n            \"fieldName\": \"lastName\",\n            \"fieldValue\": \"Joe Bloggs\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{_endpoint}}/services/apexrest/TetrisEmailService",
+									"host": [
+										"{{_endpoint}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"TetrisEmailService"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "REST API provides a powerful, convenient, and simple Web services API for interacting with Lightning Platform. Its advantages include ease of integration and development, and it’s an excellent choice of technology for use with mobile applications and Web 2.0 projects. If you have many records to process, consider using Bulk API, which is based on REST principles and optimized for large sets of data.\n\n📚 [REST API Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_what_is_rest_api.htm)"
+		},
+		{
+			"name": "1. OAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"auth_token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"instance_url\", jsonData.instance_url);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}{{secToken}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test.salesforce.com/services/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"test",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "OAuth against Salesforce. You must have set the clientID and clientSecret ENV variables as well as your user specific user,password and securityToken info"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "useBrowser",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "scope",
+				"value": "api",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{clientId}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{url}}{{site}}/services/oauth2/authorize",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "access_token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "implicit",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://test.salesforce.com"
+		},
+		{
+			"key": "version",
+			"value": "51.0"
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "secretToken",
+			"value": ""
+		},
+		{
+			"key": "clientId",
+			"value": "3MVG98_Psg5cppyYCmk1gZNC25o00SXpgpodlS29IZ6pXiHkt3xuPa5qIjBTtEgdsiMuIWVN_8F0jnwEtbDh4"
+		},
+		{
+			"key": "clientSecret",
+			"value": ""
+		},
+		{
+			"key": "redirectUrl",
+			"value": ""
+		},
+		{
+			"key": "initAccessToken",
+			"value": ""
+		},
+		{
+			"key": "site",
+			"value": ""
+		},
+		{
+			"key": "_accessToken",
+			"value": ""
+		},
+		{
+			"key": "_endpoint",
+			"value": "https://sagegroup--ecomm2dev.my.salesforce.com"
+		},
+		{
+			"key": "_userId",
+			"value": ""
+		},
+		{
+			"key": "_orgId",
+			"value": ""
+		}
+	]
+}

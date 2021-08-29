@@ -1,0 +1,40 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef1"
+            },            
+            "Name":"OrderManagementBrokerInvocationV1_send",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "GenericHTTPRequest",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": true,
+            "Metadata_Invoker_Id__c": "OrderManagementBrokerInvocationV1_send",
+            "Method__c": "send",
+            "Output_Interface_Version__c": "IHTTPResponse",
+            "Override_Default__c": true,
+            "Service_Name__c": "HTTPCalloutBroker",
+            "Stub_Class__c": "OrderMgmtHTTP_Stub"
+        },
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef2"
+            },            
+            "Name":"CloudID_OrderManagement_ClientGrant",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "TokenAuthRequest",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": true,
+            "Metadata_Invoker_Id__c": "CloudID_OrderManagement_ClientGrant",
+            "Method__c": "send",
+            "Output_Interface_Version__c": "ITokenAuthResponse",
+            "Override_Default__c": true,
+            "Service_Name__c": "OAuthClientGrantProxy",
+            "Stub_Class__c": "ClientGrantToken_Stub"
+        }
+    ]
+}

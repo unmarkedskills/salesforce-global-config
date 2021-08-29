@@ -1,0 +1,56 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef1"
+            },
+            "Name":"DynamicQueryService_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Invocation_Type__c": "Stub",
+            "Log_Requests__c": false,
+            "Metadata_Invoker_Id__c": "DynamicQueryService_Invocation_1",
+            "Output_Interface_Version__c": "IQueryListMap",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService",
+            "Stub_Class__c": "DynamicQueryV1_Stub"
+        },
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef3"
+            },
+            "Name":"ProductHoldingSummary_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": false,
+            "Metadata_Invoker_Id__c": "ProductHoldingSummary_Invocation_1",
+            "Method__c": "Query",
+            "Output_Interface_Version__c": "IQueryListMap",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService",
+            "Stub_Class__c": "ProductHoldingSummaryV1_Stub"
+        },
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef4"
+            },
+            "Name":"KeyAccountInfo_Invocation_1",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "DynamicQueryConfigData",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": false,
+            "Metadata_Invoker_Id__c": "KeyAccountInfo_Invocation_1",
+            "Method__c": "Query",
+            "Output_Interface_Version__c": "IQueryListMap",
+            "Override_Default__c": true,
+            "Service_Name__c": "DynamicQueryService",
+            "Stub_Class__c": "KeyAccountInfoV1_Stub"
+        }                       
+    ]
+}

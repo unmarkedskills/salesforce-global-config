@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Service_Invocation_Override__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "keyinfo-prodholding-Service_Invocation_Override__cs.json"
+        ]
+    }
+]

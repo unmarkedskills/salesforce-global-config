@@ -1,0 +1,2548 @@
+{
+	"info": {
+		"_postman_id": "75b60dd4-539c-4783-91ff-f0841bebe414",
+		"name": "SF Customer Managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assisted Sales",
+			"item": [
+				{
+					"name": "New Customer Account - Setup Assisted Sales",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"ZAP Test Account1\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Streeting\",\n      \"city\": \"Newcastle\",\n      \"state\": \"North Tyneside\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"craig.bradshaw@sage.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Crates a new Account/Contact\nReturns objectid's for the account, contact, and opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Customer Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/?idType=guid&id={{customer-account-guid}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							],
+							"query": [
+								{
+									"key": "idType",
+									"value": "guid"
+								},
+								{
+									"key": "id",
+									"value": "{{customer-account-guid}}"
+								}
+							]
+						},
+						"description": "Crates a new Account/Contact\nReturns objectid's for the account, contact, and opportunity"
+					},
+					"response": []
+				},
+				{
+					"name": "New PayNowToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"let pnTokenId = jsonData.payNowTokenId;",
+									"console.log(pnTokenId);",
+									"postman.setEnvironmentVariable(\"pn-token-id\", pnTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"opportunityId\": \"{{customer-opportunity-guid}}\",\n  \"showDirectDebitPayment\": false,\n  \"showCreditcardPayment\": true,\n  \"contactId\": \"{{customer-contact-guid}}\",\n  \"sendEmail\": false,\n  \"quoteExpirationUtcDateTime\":\"2020-11-20 23:00:00\",\n  \"baskets\": [\n    {\n        \"basketUiName\": \"Your Sage Subscription\",\n        \"subtotalBeforeTaxWithCurrency\": \"£5 per month\",\n        \"totalWithCurrency\": \"£5 per month\",\n        \"totalAfterPromotionWithCurrency\": \"3 months free then £6 per month\",\n        \"taxWithCurrency\": \"£1 per month\",\n        \"promotionDiscountPeriod\": \"3 months\",\n        \"promotionDiscountWithCurrency\": \"3 months free\",\n        \"products\": [\n            {\n                \"title\": \"Sage Business Cloud Accounting\",\n                \"priceWithCurrency\": \"£5 per month\",\n                \"taxWithCurrency\": \"£1 per month\",\n                \"ratePlans\": [\n                    {\n                        \"id\": \"\"\n                    }\n                ]\n            }\n        ]\n    }\n]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/pay-now-token",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"pay-now-token"
+							]
+						},
+						"description": "Crates a new PayNowToken request for the give {{opportunity-id}}. If you set sendEmail : true it email the {{contact-id}} with the token link\nThis PayNowToken is associated to the {{opportunity-id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get PayNowToken",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-correlation-id",
+								"type": "text",
+								"value": "CB1234563"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/pay-now-token?payNowTokenId={{pn-token-id}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"pay-now-token"
+							],
+							"query": [
+								{
+									"key": "payNowTokenId",
+									"value": "{{pn-token-id}}"
+								}
+							]
+						},
+						"description": "Get's the paynowtoken created in step 3 to validate it was created"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Opportunity PayNowtokens",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-correlation-id",
+								"type": "text",
+								"value": "CB1234563"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/opportunity/{{customer-opportunity-guid}}/pay-now-tokens",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"opportunity",
+								"{{customer-opportunity-guid}}",
+								"pay-now-tokens"
+							]
+						},
+						"description": "Fetches all the associated PayNowTokens for the supplied {{opportunity-id}} ordered by lastmodified date"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Opportunity Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-correlation-id",
+								"value": "CB1234563",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"opportunity\": {\n    \"id\": \"{{customer-opportunity-guid}}\",\n    \"name\": \"Test Opp testing\",\n    \"stageName\": \"Closed Won\",\n    \"wonLostReason\": \"Won from Competitor\",\n    \"wonLostReasonLevel1\": \"Won from UKI Accounts / Payroll\",\n    \"wonLostReasonLevel2\": \"Xero\",\n    \"wonLostReasonLevel3\": \"Price\",\n    \"wonLostComments\": \"string\"\n  },\n  \"products\": [\n    {\n      \"name\": \"Sage Business Cloud Accounting\",\n      \"monthlyRecurringRevenue\": 18.50\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/opportunity/{{customer-opportunity-guid}}/stage-and-products",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"opportunity",
+								"{{customer-opportunity-guid}}",
+								"stage-and-products"
+							]
+						},
+						"description": "Update the {{opportunity-id}} to closed Won and add new products to the opp. The product name must match those of the pricebookentry in SF"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Digital - Try",
+			"item": [
+				{
+					"name": "New Customer Account - With Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Author",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": {\n        \"name\": \"Stark Industries\",\n        \"locale\": \"en_GB\",\n        \"currencyCode\": \"GBP\",\n        \"transactionType\": \"Buy\",\n        \"billingAddress\": {\n            \"line1\": \"200 Park Avenue\",\n            \"city\": \"Manhatten\",\n            \"state\": \"New York\",\n            \"postalCode\": \"10166\",\n            \"country\": \"United States\"\n        },\n        \"phone\": \"7329804893\",\n        \"industry\": \"Corporation\"\n    },\n    \"contact\": {\n        \"firstName\": \"Tony\",\n        \"lastName\": \"Stark\",\n        \"email\": \"iron.man@starkindustries.com\",\n        \"phone\": \"7329804893\",\n        \"locale\": \"en_GB\",\n        \"emailOptin\": true\n    },\n    \"products\": [\n        {\n            \"productName\": \"Sage Business Cloud Accounting\",\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Crates a new Account, Contact and Opportunity based on product name\nReturns objectid's for the account, contact, and opportunity\n{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0011x00001BTSDyAAP\",\n            \"globalId\": \"1000000127\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0061x00000JNE14AAH\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0031x000011w8NMAAY\",\n            \"globalId\": \"2000000131\"\n        }\n    ]\n}"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Customer Account - No Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"account\": {\n        \"name\": \"My Test Account3\",\n        \"locale\": \"en_GB\",\n        \"currencyCode\": \"GBP\",\n        \"transactionType\": \"Try\",\n        \"id\": {\n            \"scope\": \"account\",\n            \"guid\": \"0017E00001DZu34QAD\"\n        },\n        \"phone\": \"010920901\",\n        \"industry\": \"Financial Services\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Updates the existing account details including address information"
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer Account - No contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"My Test Account AA 2\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Try\",\n    \"phone\": \"079849892982\",\n    \"industry\": \"Financial Services\"\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Crates a new Account and Opportunity\nReturns objectid's for the account and opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Digital - Try Buy",
+			"item": [
+				{
+					"name": "New Customer Account - Try (no contact)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"ZAP CB Try account - no contact\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Try\",\n    \"phone\": \"079849892982\",\n    \"industry\": \"Financial Services\"\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Crates a new Account/Contact\nReturns objectid's for the account, contact, and opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Customer Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/?id={{customer-account-guid}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{customer-account-guid}}"
+								}
+							]
+						},
+						"description": "Crates a new Account/Contact\nReturns objectid's for the account, contact, and opportunity"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer Account - oppId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"My Test Account X1\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street\",\n      \"line2\": \"The Lane\",\n      \"city\": \"Newcastle\",\n      \"state\": \"North Tyneside\",\n      \"postalCode\": \"NE66 8UU\",\n      \"country\": \"United Kingdom\"\n    },\n    \"contact\": {\n        \"firstName\": \"Mike\",\n        \"lastName\": \"McTester\",\n        \"email\": \"m.mtester@example.com\",\n        \"phone\": \"010920901\",\n        \"locale\": \"en_GB\",\n        \"emailOptin\": true\n    },    \n    \"phone\": \"1090129092091029\",\n    \"industry\": \"Financial Services\",\n    \"id\": {\n      \"scope\": \"account\",\n      \"guid\": \"{{customer-account-guid}}\"\n    }\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ],\n  \"opportunity\": {\n      \"scope\": \"opportunity\",\n      \"guid\": \"{{opportunity-id}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Updates the Account\nThis variation passes the opportunity ID so it can be closed won"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Digital - Try Buy via Product Name",
+			"item": [
+				{
+					"name": "New Customer Account - Try no contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"My Test Account AA 2\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Try\",\n    \"phone\": \"079849892982\",\n    \"industry\": \"Financial Services\"\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Crates a new Account/Contact\nReturns objectid's for the account, contact, and opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Customer Account - product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"My Test Account AA 2\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Wilbur Street\",\n      \"city\": \"Newcastle\",\n      \"state\": \"North Tyneside\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"091209091\",\n    \"industry\": \"Financial Services\",\n    \"id\": {\n      \"scope\": \"account\",\n      \"guid\": \"{{customer-account-guid}}\"\n    }\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/?idType=guid&id={{customer-account-guid}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							],
+							"query": [
+								{
+									"key": "idType",
+									"value": "guid"
+								},
+								{
+									"key": "id",
+									"value": "{{customer-account-guid}}"
+								}
+							]
+						},
+						"description": "Updates the existing account with address info and converts to a Customer\nMatches the product to an exisitng opportuity (on the account) with procuts that match and that isn't closed won (or creates new if it doesn't find one)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Digital - Buy",
+			"item": [
+				{
+					"name": "Update Customer Account - Opportunity Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Auth",
+								"type": "text",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"account\": {\n        \"name\": \"My Test Account3\",\n        \"locale\": \"en_GB\",\n        \"currencyCode\": \"GBP\",\n        \"transactionType\": \"Buy\",\n        \"id\": {\n            \"scope\": \"account\",\n            \"guid\": \"{{accountId}}\"\n        },\n        \"phone\": \"010920901\",\n        \"industry\": \"Financial Services\"\n    },\n    \"opportunity\": {\n        \"scope\": \"opportunity\",\n        \"guid\": \"{{opportunity-id}}\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Updates the existing account with address info and converts to a Customer\nMatches the product to an exisitng opportuity (on the account) with procuts that match and that isn't closed won (or creates new if it doesn't find one)"
+					},
+					"response": []
+				},
+				{
+					"name": "New Customer Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account\": {\n        \"name\": \"Raytheon Technologies\",\n        \"locale\": \"en_GB\",\n        \"currencyCode\": \"GBP\",\n        \"transactionType\": \"Buy\",\n        \"billingAddress\": {\n            \"line1\": \"6801 Rockledge Dr\",\n            \"city\": \"Waltham\",\n            \"state\": \"Massachusetts\",\n            \"postalCode\": \"20817\",\n            \"country\": \"United States\"\n        },\n        \"phone\": \"41496000\",\n        \"industry\": \"Corporation\"\n    },\n    \"contact\": {\n        \"firstName\": \"Side\",\n        \"lastName\": \"Winder\",\n        \"email\": \"side.winder@rthtest.com\",\n        \"phone\": \"7329804893\",\n        \"locale\": \"en_GB\",\n        \"emailOptin\": true\n    },\n    \"products\": [\n        {\n            \"productName\": \"Sage Business Cloud Accounting\",\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Creates a Customer Account with suppplied Billing Address and contact\nAlso creates a closed won opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Customer Account - Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Auth",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"account\": {\n        \"name\": \"My Test Account3\",\n        \"locale\": \"en_GB\",\n        \"currencyCode\": \"GBP\",\n        \"transactionType\": \"Buy\",\n        \"id\": {\n            \"scope\": \"account\",\n            \"guid\": \"0017E00001DZu34QAD\"\n        },\n        \"phone\": \"010920901\",\n        \"industry\": \"Financial Services\"\n    },\n    \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Updates the existing account with address info and converts to a Customer\nMatches the product to an exisitng opportuity (on the account) with procuts that match and that isn't closed won (or creates new if it doesn't find one)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "New Customer Account - Buy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": {\n    \"name\": \"My Buy Test Account\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne and Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"buy.buy@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"customer-account",
+								""
+							]
+						},
+						"description": "Creates a Customer Account with suppplied Billing Address and contact\nAlso creates a closed won opportunity"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "New Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var objs = jsonData.ids;",
+									"for (var i = 0; i < objs.length; i++) {",
+									"    var obj = objs[i];",
+									"    let l_type=obj.scope;",
+									"    let l_guid=obj.guid;",
+									"    //let l_globalid=obj.globalId;",
+									"    console.log('object : ' + l_type + ' guid = ' + l_guid);",
+									"    if(l_type == 'account'){",
+									"       postman.setEnvironmentVariable(\"customer-account-guid\", l_guid); ",
+									"    }",
+									"    else if(l_type == 'contact'){",
+									"       postman.setEnvironmentVariable(\"customer-contact-guid\", l_guid); ",
+									"    }else if(l_type == 'opportunity'){",
+									"       postman.setEnvironmentVariable(\"customer-opportunity-guid\", l_guid); ",
+									"    }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contact\": {\n        \"firstName\" : \"Clark\",\n        \"lastName\" : \"Kent\",\n        \"email\" : \"kal.el@dailyplanet.com\",\n        \"phone\" : \"012121212121\",\n        \"locale\" : \"en_GB\",\n        \"emailOptin\" : true,\n        \"account\" : {\n            \"scope\" : \"account\",\n            \"guid\" : \"{{accountId}}\",\n            \"globalid\" : \"{{accountGlobalId}}\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/contact/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"contact",
+								""
+							]
+						},
+						"description": "Creates a new contact in salesforce. And return id details of created contact.\n{\n    \"scope\": \"contact\",\n    \"guid\": \"0031x000011w8BPAAY\",\n    \"globalId\": \"2000000130\"\n}"
+					},
+					"response": [
+						{
+							"name": "New Customer Account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Correlation-Id",
+										"type": "text",
+										"value": "{{cid}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"account\": {\n    \"name\": \"My Test AccountXXXX\",\n    \"locale\": \"en_GB\",\n    \"currencyCode\": \"GBP\",\n    \"transactionType\": \"Buy\",\n    \"billingAddress\": {\n      \"line1\": \"123 Street AA\",\n      \"city\": \"Newcastle\",\n      \"state\": \"Tyne & Wear\",\n      \"postalCode\": \"NE1 9KK\",\n      \"country\": \"United Kingdom\"\n    },\n    \"phone\": \"010920901\",\n    \"industry\": \"Financial Services\"\n  },\n  \"contact\": {\n    \"firstName\": \"Fess\",\n    \"lastName\": \"Terjasaa\",\n    \"email\": \"asdf.atserjsa1@example.com\",\n    \"phone\": \"010920901\",\n    \"locale\": \"en_GB\",\n    \"emailOptin\": true\n  },\n  \"products\": [\n    {\n      \"productName\": \"Sage Business Cloud Accounting\",\n      \"quantity\": 1\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{instance_url}}/services/apexrest/v1/customer-account/",
+									"host": [
+										"{{instance_url}}"
+									],
+									"path": [
+										"services",
+										"apexrest",
+										"v1",
+										"customer-account",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 18 Jan 2021 15:00:17 GMT"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536002; includeSubDomains"
+								},
+								{
+									"key": "Public-Key-Pins-Report-Only",
+									"value": "pin-sha256=\"9n0izTnSRF+W4W4JTq51avSXkWhQB8duS2bxVLfzXsY=\"; pin-sha256=\"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=\"; pin-sha256=\"njN4rRG+22dNXAi+yb8e3UMypgzPUPHlv4+foULwl1g=\"; max-age=86400; includeSubDomains; report-uri=\"https://a.forcesslreports.com/hpkp-report/00D2500000079Enm\";"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=86400, report-uri=\"https://a.forcesslreports.com/Expect-CT-report/00D2500000079Enm\""
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-Robots-Tag",
+									"value": "none"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,must-revalidate,max-age=0,no-store,private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ids\": [\n        {\n            \"scope\": \"account\",\n            \"guid\": \"0012500001OgqtKAAR\",\n            \"globalId\": \"1000000035\"\n        },\n        {\n            \"scope\": \"opportunity\",\n            \"guid\": \"0062500000LcKJ9AAN\",\n            \"globalId\": null\n        },\n        {\n            \"scope\": \"contact\",\n            \"guid\": \"0032500001LHP7kAAH\",\n            \"globalId\": \"2000000130\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"//TODO set the contact id",
+									"// let guid = jsonData.something;",
+									"// console.log(pnTokenId);",
+									"// postman.setEnvironmentVariable(\"customer-account-guid\", pnTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/contact?id={{contactIdOrGlobalId}}",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"contact"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{contactIdOrGlobalId}}",
+									"description": "Salesforce contact global id"
+								}
+							]
+						},
+						"description": "Get contact details, expects contact global id or salesforce id.\nReturns contact details\n{\n    \"phone\": \"8178178173\",\n    \"locale\": \"\",\n    \"lastName\": \"StehrTest\",\n    \"firstName\": \"AdolphTest\",\n    \"emailOptin\": false,\n    \"email\": \"stehrtest@testing.com\",\n    \"id\": {\n        \"scope\": \"contact\",\n        \"guid\": \"0031x000011VVljAAG\",\n        \"globalId\": \"2000000046\"\n    },\n    \"account\": {\n        \"scope\": \"account\",\n        \"guid\": \"0011x00001BRdZKAA1\",\n        \"globalId\": \"1000000042\"\n    }\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"//TODO set the contact id",
+									"// let guid = jsonData.something;",
+									"// console.log(pnTokenId);",
+									"// postman.setEnvironmentVariable(\"customer-account-guid\", pnTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"type": "text",
+								"value": "{{cid}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"contact\": {\n        \"firstName\" : \"Bruce\",\n        \"lastName\" : \"Wayne\",\n        \"email\" : \"bat.man@wayneindustries.com\",\n        \"phone\" : \"0109209012\",\n        \"locale\" : \"en_GB\",\n        \"emailOptin\" : true,\n        \"id\" : {\n            \"scope\" : \"contact\",\n            \"guid\" : \"{{contactId}}\",\n            \"globalid\" : \"{{contactGlobalId}}\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v1/contact/",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v1",
+								"contact",
+								""
+							]
+						},
+						"description": "Update a contact based on contact id or global id. Returns empty response with status 204."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Legacy",
+			"item": [
+				{
+					"name": "QueryOpportunity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Opportunity ProductsV2 : Try",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-correlation-id",
+								"type": "text",
+								"value": "CB1234563"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"transactionType\": \"try\",\n  \"products\": [\n    {\n      \"name\": \"Sage Business Cloud Accounting\",\n      \"monthlyRecurringRevenue\": 20\n    }\n  ]\n}\n\nhttps://sagegroup--uat2.my.salesforce.com",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v2/opportunity/0067Y000007j8uYQAQ/stage-and-products",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v2",
+								"opportunity",
+								"0067Y000007j8uYQAQ",
+								"stage-and-products"
+							]
+						},
+						"description": "Update the {{opportunity-id}} to closed Won and add new products to the opp. The product name must match those of the pricebookentry in SF"
+					},
+					"response": []
+				},
+				{
+					"name": "Opportunity ProductsV2 : Buy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "x-correlation-id",
+								"value": "CB1234563",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"transactionType\": \"BUY\",\n  \"products\": [\n    {\n      \"name\": \"Sage Business Cloud Accounting\",\n      \"monthlyRecurringRevenue\": 20\n    } \n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{instance_url}}/services/apexrest/v2/opportunity/0067Y000007j8uYQAQ/stage-and-products",
+							"host": [
+								"{{instance_url}}"
+							],
+							"path": [
+								"services",
+								"apexrest",
+								"v2",
+								"opportunity",
+								"0067Y000007j8uYQAQ",
+								"stage-and-products"
+							]
+						},
+						"description": "Update the {{opportunity-id}} to closed Won and add new products to the opp. The product name must match those of the pricebookentry in SF"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "1. OAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"auth_token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"instance_url\", jsonData.instance_url);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{clientID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{clientSecret}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}{{secToken}}",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://test.salesforce.com/services/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"test",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "OAuth against Salesforce. You must have set the clientID and clientSecret ENV variables as well as your user specific user,password and securityToken info"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,39 @@
+{
+  "orgName": "SageGroup",
+  "edition": "Developer",
+  "adminEmail": "",
+  "hasSampleData": false,
+  "features": [
+    "EnableSetPasswordInApi",
+    "Communities",
+    "ServiceCloud",
+    "MultiCurrency",
+    "StateAndCountryPicklist",
+    "PlatformCache",
+    "SharedActivities"
+  ],
+  "settings": {
+    "communitiesSettings": {
+      "enableNetworksEnabled": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "omniChannelSettings": {
+      "enableOmniChannel": true
+    },
+    "caseSettings": {
+      "systemUserEmail": ""
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    },
+    "liveAgentSettings": {
+      "enableLiveAgent": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true,
+      "enableEndUserLanguages": true
+    }
+  }
+}

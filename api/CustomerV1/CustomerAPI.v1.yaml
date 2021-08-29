@@ -1,0 +1,1082 @@
+openapi: 3.0.0
+info:
+  title: CustomerAPI
+  version: '1.0'
+  description: CRM centric API. Exposed key SF functions to the enterprise.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/v1/opportunity/{id}/stage-and-products':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-v1-opportunity-id-stage-and-products
+      responses:
+        '204':
+          description: |-
+            No Content
+            Message delivered and considered successfull
+        '400':
+          description: |-
+            Bad Request
+            Data supplied is bad in some way
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+        '404':
+          description: |-
+            Not Found
+            The URI or record doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: |-
+            Internal Server Error
+            Something unexpected happened.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StageAndProductRequest'
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-correlation-id
+      description: Update the Give Opportunity with stage (and closed lost reason) overwriting any Products (OpportunityLineItems) supplied
+  /v1/pay-now-token:
+    post:
+      summary: ''
+      operationId: post-v1-paymentmethod
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayNowToken'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-correlation-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayNowRequest'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+      description: "Request a Payment method for the given Opportuniy. The PayNowToken__c will be associated with given opportunityid\nThe contactId needs to be valid sellTo contact (i.e. it has the SellTO Opportunity Contact Role)\nThis contactId will ultimately govern which user email recieves the email from salesfroce. \nIf the locale is supplied it will be uses to look up "
+    parameters: []
+    get:
+      summary: ''
+      operationId: get-v1-paymentmethod
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayNowToken'
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: payNowTokenId
+        - schema:
+            type: string
+          in: header
+          name: x-correlation-id
+  /auth:
+    post:
+      summary: ''
+      operationId: post-Auth
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/oAuthResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: password
+                client_id:
+                  type: string
+                client_secret:
+                  type: string
+                password:
+                  type: string
+                username:
+                  type: string
+              required:
+                - grant_type
+                - client_id
+                - client_secret
+                - password
+                - username
+            examples:
+              example-1: {}
+      description: 'oAuth against SF to get a access_token to use as Authorization: Bearer in subsequent calls.'
+    parameters: []
+  '/v1/opportunity/{id}/pay-now-tokens':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PayNowToken'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: get-v1-opportunity-id-paymentmethods
+      description: |
+        Service that returns the associated paynowtokens related to the opportunity for the client to filter.
+        Sorted by lastmodified
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+  /v1/customer-account/:
+    post:
+      summary: ''
+      operationId: post-v1-account
+      responses:
+        '200':
+          description: OK. Retunrs a list of object ids - this will always include the accout and opportunity id and the contact if supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccountResponse'
+              examples:
+                example-1: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccountRequest'
+        description: ''
+      description: "Created an Account (and contacts if supplied) in Salesforce\n- always creates an Opportunity\nproducts is mandatory and relates to the product being Tried or purchased\n\n@returns a list of ObjectIds for each object created. \nTo help migrate from guid to global-id we supply both values if the object in SF supports them\n\n200 - OK\n400 - Bad Request\n500 - Internal Error"
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+    parameters: []
+    get:
+      summary: customeraccount
+      operationId: get-v1-account
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCustomerAccountResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+        - schema:
+            type: string
+          in: query
+          name: id
+          required: true
+          description: the account ID (guid or globalid)
+        - schema:
+            type: string
+          in: query
+          name: email
+          description: for filtering the results
+      description: |
+        Gets the "customer account" (account and contacts - filtered based on query params)
+        id - See /customer-account POST - you get back id's with both guid and global-id
+        you can supply either of these id's
+        Filtering :
+        - if you provide the email it will sift through contacts associated to the account that match the email. In SF you can get > 1 contact for valid reasons
+        - if you provide the businessId it filters the contacts based on their relati
+    put:
+      summary: ''
+      operationId: put-v1-account
+      responses:
+        '204':
+          description: Accepted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAccountRequest'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+      description: "Update the account information. \nIf this update is related to the Buy Journey - the transactionType needs to be Buy to trigger : \n- the account moving to customer\n- the opportunity related to these transactions moving to closed won.\nIn some cases the caller may not have the opportunityid supplied when the trial was created - if that is the case, supply the product information so that the opportunity in the CRM can be matched better.\n \nFor contact updates see /v1/contact\n\n"
+  /v1/contact:
+    put:
+      summary: ''
+      operationId: put-v1-contact
+      responses:
+        '204':
+          description: Accepted
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContactRequest'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+      description: Udate Contact for the provided id (ObjectId)
+    post:
+      summary: ''
+      operationId: post-v1-contact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContactResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContactRequest'
+      description: |-
+        Create a new Contact (and relate it the the supplied account id)
+
+        Returns the objectid (guid and glboalid) this is known by in the CRM
+    get:
+      summary: ''
+      operationId: get-v1-contact
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingContact'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: id
+          required: true
+      description: "Get a Contact. \nID can be guid or globalId\n"
+  '/v2/opportunity/{id}/stage-and-products':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: put-v2-opportunity-id-stage-and-products
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      description: "Added to temp close gap on using tetris account service - udpates to the opp for try and buy. See the OpportunityUpdateRequest for info \nThe caller needs to supply\n- transactionType (try or buy)\n- product name(s)\n\nThis will manage the opportunity in SF and update it's stage + products as needed\n\nResponse :\n204 - Successfull\n400 - Bad Request\n404 - Opportunity not found\n500 - unexpected error"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityUpdateRequest'
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: X-Correlation-Id
+components:
+  schemas:
+    Product:
+      title: Product
+      type: object
+      description: Summary Product Info
+      x-examples:
+        example-1: {}
+      properties:
+        name:
+          type: string
+          example: Accounts
+          maxLength: 255
+          minLength: 3
+        monthlyRecurringRevenue:
+          type: number
+          example: 5
+      required:
+        - name
+    Opportunity:
+      title: Opportunity
+      type: object
+      description: |-
+        Represents the Opportunity information
+        the id needs to be (longer term) an generated ID on the SF opportuniy record an not the interally generated guid
+      x-examples:
+        example-1: {}
+      properties:
+        id:
+          type: string
+          example: 0061o00000xK9K3AAK
+          minLength: 10
+          maxLength: 18
+        name:
+          type: string
+          example: Test Opp
+          maxLength: 120
+          minLength: 2
+        stageName:
+          type: string
+          example: Closed Won
+          maxLength: 50
+        wonLostReason:
+          type: string
+          example: Won From Competitor
+          maxLength: 150
+        wonLostReasonLevel1:
+          type: string
+          example: Won from Xero
+          maxLength: 150
+        wonLostReasonLevel2:
+          type: string
+          example: Xero
+          maxLength: 150
+        wonLostReasonLevel3:
+          type: string
+          example: Price
+          maxLength: 150
+        wonLostComments:
+          type: string
+          maxLength: 255
+      required:
+        - id
+        - stageName
+        - wonLostReason
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        source:
+          type: string
+        correlationid:
+          type: string
+    StageAndProductRequest:
+      title: OpportunityProducts
+      type: object
+      properties:
+        opportunity:
+          $ref: '#/components/schemas/Opportunity'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+        - opportunity
+        - products
+    oAuthResponse:
+      title: oAuthResponse
+      type: object
+      properties:
+        access_token:
+          type: string
+        instance_url:
+          type: string
+        token_type:
+          type: string
+        issued_at:
+          type: string
+        signature:
+          type: string
+    PayNowRequest:
+      title: PayNowRequest
+      type: object
+      description: "For requesting a paynow to be generated.\nIf you supply sendEmail false the email will not be sent\nquoteExpirationUtcDateTime is the quotes expiry format like \nyyyy-MM-dd HH:mm:ss\nWe use the Opp and Contact to derive things like \nLocale\ncountrycode\ncontact email + email template\nThe rest just passes through to the PayNow Service"
+      properties:
+        opportunityId:
+          type: string
+          minLength: 10
+          maxLength: 18
+        showDirectDebitPayment:
+          type: boolean
+        showCreditcardPayment:
+          type: boolean
+        contactId:
+          type: string
+          minLength: 10
+          maxLength: 18
+        sendEmail:
+          type: boolean
+        quoteExpirationUtcDateTime:
+          type: string
+          minLength: 15
+          maxLength: 20
+        baskets:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentBasket'
+      required:
+        - opportunityId
+        - contactId
+        - sendEmail
+        - baskets
+    PaymentBasket:
+      title: PaymentBasket
+      type: object
+      properties:
+        basketUIName:
+          type: string
+          maxLength: 150
+        subtotalBeforeTaxWithCurrency:
+          type: string
+          maxLength: 50
+        totalWithCurrency:
+          type: string
+          maxLength: 50
+        totalAfterPromotionWithCurrency:
+          type: string
+          maxLength: 50
+        taxWithCurrency:
+          type: string
+          maxLength: 50
+        promotionDiscountPeriod:
+          type: string
+          maxLength: 50
+        promotionDiscountWithCurrency:
+          type: string
+          maxLength: 50
+        product:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketProduct'
+      required:
+        - product
+    BasketProduct:
+      title: BasketProduct
+      type: object
+      properties:
+        title:
+          type: string
+          minLength: 5
+          maxLength: 255
+        priceWithCurrency:
+          type: string
+          maxLength: 25
+        taxWithCurrency:
+          type: string
+          maxLength: 25
+        ratePlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/BasketRatePlan'
+    BasketRatePlan:
+      title: BasketRatePLan
+      type: object
+      properties:
+        id:
+          type: string
+          example: SBCAccountingBuyNow
+    PayNowToken:
+      title: PayNowToken
+      type: object
+      description: "Reflects the PayNowToken__c in SF\n\n- Token: the token supplied from PayNow\n- Date: the lastModifiedDate\n- type: e.e \"Credit Card\" or \"Bank Transfer\"\n- status: e.g.\"Payment Provided\" and other valid values\n- redirectURL: the URL for sumbitting the details\n- paymentMethodId: if completed, expect this to be populated \n- payNowTokenId: the salesfroce ID/External ID for the PayNowToken__c record"
+      properties:
+        token:
+          type: string
+          example: a1S1x000000oVciEAE
+        lastModifiedDate:
+          type: string
+        type:
+          type: string
+          example: Bank Transfer
+          enum:
+            - Credit Card
+            - Bank Transfer
+        status:
+          type: string
+          example: Payment Provided
+          enum:
+            - Payment Provided
+            - Quote Viewed
+        redirectURL:
+          type: string
+        paymentMethodId:
+          type: string
+        payNowTokenId:
+          type: string
+      required:
+        - token
+        - type
+        - redirectURL
+    EmailRequest:
+      title: EmailRequest
+      type: object
+      x-examples: {}
+      properties:
+        emailTemplateName:
+          type: string
+          example: TetrisCrossSellENGB
+        contactId:
+          $ref: '#/components/schemas/ObjectIds'
+        ccEmailAddressList:
+          type: array
+          items:
+            type: string
+        bccEmailAddressList:
+          type: array
+          items:
+            type: string
+        toEmailAddress:
+          type: string
+          example: frank.tester@example.com
+        fromEmailAddress:
+          type: string
+          example: noreply@sage.com
+        fromName:
+          type: string
+          example: Sage One
+        templateValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailParameters'
+        relatedTo:
+          $ref: '#/components/schemas/ObjectIds'
+      required:
+        - emailTemplateName
+        - toEmailAddress
+        - fromEmailAddress
+        - fromName
+    EmailParameters:
+      title: EmailParameters
+      type: object
+      properties:
+        name:
+          type: string
+          example: productNames
+        value:
+          type: string
+          example: Sage Business Cloud
+    CreateAccountRequest:
+      title: CreateAccountRequest
+      type: object
+      description: |-
+        account : the custer account to be created (see #Account for info)
+        contacts : optional contacts to be associated with the account (see #Contact for info)
+        products : mandatory so we can track into opportunity pipeline
+      properties:
+        account:
+          $ref: '#/components/schemas/Account'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpportunityProduct'
+      required:
+        - account
+        - products
+    Address:
+      title: Address
+      type: object
+      description: ''
+      properties:
+        line1:
+          type: string
+          maxLength: 100
+          minLength: 2
+        line2:
+          type: string
+        city:
+          type: string
+          maxLength: 50
+          minLength: 2
+        state:
+          type: string
+          minLength: 2
+          maxLength: 100
+        postalCode:
+          type: string
+          minLength: 2
+          maxLength: 20
+        country:
+          type: string
+          minLength: 2
+          maxLength: 50
+          example: United Kingdom
+        countryCode:
+          type: string
+      required:
+        - line1
+        - city
+        - state
+        - postalCode
+        - country
+    Contact:
+      title: Contact
+      type: object
+      description: |-
+        emailOptin : defaults to false
+        id : can hold with the interal SF record id (guid) or the global id and is only set if the record exists
+        account : references the account id (guid or global-id) but is mandatory for a contact in the CRM
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        locale:
+          type: string
+        emailOptin:
+          type: boolean
+        account:
+          $ref: '#/components/schemas/ObjectIds'
+      required:
+        - email
+        - locale
+        - account
+    ObjectIds:
+      title: ObjectIds
+      type: object
+      description: |-
+        A holder of what a record is know by in SF.
+        guid is the internal records ID (currently in use but deprecated)
+        globalId is the new global id assisned on create
+        the scope in this instance is the entity name. currently supports :
+        account, contat, opportunity
+      properties:
+        scope:
+          type: string
+          enum:
+            - account
+            - contact
+            - opportunity
+            - paynowtoken
+          example: contact
+        guid:
+          type: string
+          example: 0031x000010FaOgAAK
+        globalId:
+          type: string
+          example: '1000000001'
+      required:
+        - scope
+    Account:
+      title: Account
+      type: object
+      description: "name : account / company name\nlocale : e.g. en_GB \ncurrencyCode : GBP / USD etc\ntransactionType : try or buy and drives if a Customer or Prospect is created in SF \nbillingAddress : if supplied there are mandatory items that need to be provided\nphone : for the account\nindustry : we expect one of : Construction, Logistics & Transportation, Manufacturing Discrete, Manufacturing Process, Retail, Technology & Software, Wholesale & Distribution but can be any valid value from the SF picklist \nvatNumber : this varies by geography. must start with a 2 char ISO country code.\nsalesOffice : e.g Dublin CBC\ncountryCode : part of billingAddress\nbillingAccountId : the Zuora Billing Account (can be null)"
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          minLength: 2
+        locale:
+          type: string
+          maxLength: 5
+          minLength: 0
+        currencyCode:
+          type: string
+          enum:
+            - GBP
+            - USD
+            - EUR
+          maxLength: 3
+          minLength: 3
+        transactionType:
+          type: string
+          enum:
+            - Try
+            - Buy
+          maxLength: 3
+          minLength: 3
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        phone:
+          type: string
+        industry:
+          type: string
+          maxLength: 50
+          minLength: 5
+        vatNumber:
+          type: string
+          example: GB123456789
+          maxLength: 15
+          pattern: '^[a-zA-Z0-9]{5,15}'
+          minLength: 5
+        salesOffice:
+          type: string
+        billingAccountId:
+          type: string
+      required:
+        - name
+        - locale
+        - currencyCode
+        - transactionType
+    CreateAccountResponse:
+      title: CreateAccountResponse
+      type: object
+      description: |
+        Returns the ID's of the things created in SF.
+        Each id has a scope defining the entity is created. We return both the salesfroce records id (guid as is used widely today) and the global-id (what we're moving towards)
+      properties:
+        ids:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectIds'
+    GetRequest:
+      title: GetRequest
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjectIds'
+    CreateContactRequest:
+      title: CreateContactRequest
+      type: object
+      description: |
+        Create a contact in SF. It is assosciated to the relevant account by supplying the account info (see CreateAccountRequest:POST)
+      properties:
+        contact:
+          $ref: '#/components/schemas/Contact'
+      required:
+        - contact
+    UpdateAccountRequest:
+      title: UpdateAccountRequest
+      type: object
+      description: "Updates the account.  Expect this to be for a Buy transactionType but supports both\nif opportunityid is supplied it will be used, otherwise supply the product so we can try to match the open opportunity to close won it. \nIf we cannot match the opportunity we create a new one and move to closed won"
+      properties:
+        account:
+          $ref: '#/components/schemas/ExistingAccount'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpportunityProduct'
+        opportunity:
+          $ref: '#/components/schemas/ObjectIds'
+      required:
+        - account
+    UpdateContactRequest:
+      title: UpdateContactRequest
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/ExistingContact'
+    OpportunityProduct:
+      title: OpportunityProduct
+      type: object
+      description: |-
+        The Product related to the Opportunity
+        ProductName is manadatory
+        the
+      properties:
+        productName:
+          type: string
+          minLength: 5
+          maxLength: 50
+        quantity:
+          type: integer
+          minimum: 1
+          default: 0
+      required:
+        - productName
+    SCOPES:
+      type: string
+      title: SCOPES
+      enum:
+        - account
+        - opportunity
+        - contact
+        - paynowtoken
+    CreateContactResponse:
+      title: CreateContactResponse
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjectIds'
+    GetContactResponse:
+      title: GetContactResponse
+      type: object
+      properties:
+        contact:
+          $ref: '#/components/schemas/ExistingContact'
+    ExistingAccount:
+      allOf:
+        - $ref: '#/components/schemas/Account'
+        - $ref: '#/components/schemas/ObjectIds'
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjectIds'
+      x-examples:
+        example-1: {}
+    ExistingContact:
+      allOf:
+        - $ref: '#/components/schemas/Contact'
+        - $ref: '#/components/schemas/ObjectIds'
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjectIds'
+    OpportunityUpdateRequest:
+      title: OpportunityUpdateRquest
+      type: object
+      description: "Opporutnity Update request that supports updating Try and Buy/Convert. This is geared around the transactionType - hight level: \n  - Buy then the opp will be closed won. Win Lost reason with be 'No Reason Specified'. \n    Products will be added to the opportuniy as opportunity products\n  - Try - The opp is be in 'Discovery'\n    Products will be added to the opportuniy as opportunity products\n    \n    "
+      properties:
+        transactionType:
+          type: string
+          enum:
+            - try
+            - buy
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+        - transactionType
+        - products
+    WinLostReasons:
+      title: WinLostReasons
+      type: object
+      properties:
+        wonLostReason:
+          type: string
+          example: Won From Competitor
+          maxLength: 150
+        wonLostReasonLevel1:
+          type: string
+          example: Won from Xero
+          maxLength: 150
+        wonLostReasonLevel2:
+          type: string
+          example: Xero
+          maxLength: 150
+        wonLostReasonLevel3:
+          type: string
+          example: Price
+          maxLength: 150
+        wonLostComments:
+          type: string
+          maxLength: 255
+      required:
+        - wonLostReason
+    GetCustomerAccountResponse:
+      title: GetCustomerAccountResponse
+      type: object
+      description: "Account and it's associated (fitlered) contacts"
+      properties:
+        account:
+          $ref: '#/components/schemas/ExistingAccount'
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExistingContact'
+  securitySchemes:
+    auth_token:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://login.salesforce.com/services/oauth2/authorize'
+          scopes:
+            api: 'Allows access to the current, logged-in user’s account using APIs'
+            full: 'Allows access to all data accessible by the logged-in user, and encompasses all other scopes.'
+            custom_permissions: Allows access to the custom permissions in an org associated with the connected app.
+security:
+  - undefined: []

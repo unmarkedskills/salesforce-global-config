@@ -1,0 +1,22 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Service_Invocation_Override__c",
+                "referenceId": "Service_Invocation_Override__cRef1"
+            },            
+            "Name":"QuoteAPIHTTPBrokerV1Invocation",
+            "External_Invocation__c": false,
+            "Input_Creation_Class__c": "GenericHTTPRequest",
+            "Invocation_Type__c": "Stub",
+            "Iteration__c": 1,
+            "Log_Requests__c": true,
+            "Metadata_Invoker_Id__c": "QuoteAPIHTTPBrokerV1Invocation",
+            "Method__c": "post",
+            "Output_Interface_Version__c": "IHTTPRequest",
+            "Override_Default__c": true,
+            "Service_Name__c": "QuoteAPIHTTPBroker",
+            "Stub_Class__c": "QuoteAPIV1_Stub"
+        }
+    ]
+}
