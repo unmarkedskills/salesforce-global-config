@@ -31,7 +31,7 @@ jobs:
       # install package to the environment
       - name: Deployment
         id: install_ci
-        uses: ./workflow/run-container-deploy # Uses an action in the specified directory
+        uses: ./workflow/run-upper-container # Uses an action in the specified directory
         env:
           SSH_KEY: ${{ secrets.ORG_SALESFORCEDX_USER_SSH_KEY }}
           ENVIRONMENT: ${{ github.event.inputs.environment }}
