@@ -28,13 +28,13 @@ function readNotificationParams() {
 
 function initDeployment() {
     
-    # echo "GITHUB URL"
-    # echo $GIT_URL
-    # echo $ENV_UAT2_URL > /root/secrets/sshkey
-    # echo "initDeployment"
-    # echo $ENVIRONMENT
-    # ls -l
-    # cat releases/deployment.json | jq -r '.releaseName'
+    echo "GITHUB URL"
+    echo $GIT_URL
+    echo $ENV_UAT2_URL > /root/secrets/sshkey
+    echo "initDeployment"
+    echo $ENVIRONMENT
+    ls -l
+    cat releases/deployment.json | jq -r '.releaseName'
     setupWorkspace
 }
 
@@ -46,7 +46,7 @@ function setupEnvironment() {
     if [ "$ENVIRONMENT" = "sandboxes" ] 
     then
         # sandbox enviornment
-        git clone "$GIT_URL/salesforce-global-sales" wp-uat
+        git clone "$GIT_URL/salesforce-global-community" wp-uat
     else
         # production enviornment
         mkdir wp-production
@@ -65,6 +65,7 @@ function setupWorkspace() {
     cp id_github_wf_clone /root/.ssh
     cp config /root/.ssh
     ssh-keyscan github.com >> ~/.ssh/known_hosts
+    chmod 600 ~/.ssh/known_hosts
     ls -l /root/.ssh
     
     echo "Clone 1 Done"
